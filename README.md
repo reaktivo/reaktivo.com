@@ -8,10 +8,10 @@ Start by creating adding a file inside the `routes` directory, look for `pages.c
 
 If you want to restart your app automatically after every change, install `supervisor` like this:
 
-   npm install -g supervisor
+    npm install -g supervisor
 
 
 You can then start your app on your development machine like this:
 
-   foreman start -f Procfile.dev
+    foreman start -f Procfile.dev
 
