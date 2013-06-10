@@ -1,3 +1,4 @@
-# List your google font strings
-# - "Arvo:400,700"
-# - "Oswald::latin"
+- 'Orienta::latin'
+- 'Varela+Round::latin'
+- 'Montserrat:400,700:latin'
+- 'Chivo:400,900,900italic,400italic:latin'

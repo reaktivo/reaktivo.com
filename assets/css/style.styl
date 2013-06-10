@@ -1,4 +1,70 @@
 @import "vendor/normalize.css"
 @import "vendor/boilerplate.css"
 
-// Write your styles here
+@import url("normalize.css")
+@import url("main.css")
+
+link-color = #00E
+
+body
+  background #eee
+  font-family Chivo, sans-serif
+  height 100%
+  overflow hidden
+
+#list
+  font-size 36px
+  position fixed
+  z-index 1
+  list-style-type none
+  margin 20px 0
+  padding 0
+  -webkit-transition all 0.2s ease-in-out
+  transition all 0.4s ease-in-out
+
+  a, a:link
+    margin 0 20px
+    display inline
+    position relative
+    color link-color
+    margin-right 0.2em
+    text-decoration none
+    border-bottom 3px solid link-color
+
+  .transparent
+    opacity 0
+
+#list a:visited
+  color #eee
+  text-decoration line-through
+  border-bottom none
+
+.js #list a
+  opacity 0
+
+#content
+  position absolute
+  top 0
+  left 100px
+  z-index 10
+  box-shadow 0 0 20px rgba(0,0,0,0.8)
+  -webkit-transition all 0.2s ease-in-out
+  transition all 0.4s ease-in-out
+  min-width 100%
+  min-height 100%
+
+  h1, h2, h3
+    font-weight normal
+
+#about #content
+  padding 40px
+  color #ccc
+  background #000
+  .text
+    position relative
+    z-index 2
+  #about-background
+    position absolute
+    z-index 1
+    top 0
+    left 0

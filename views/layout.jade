@@ -12,18 +12,17 @@ html
     include analytics
     include fonts
     block head
-  body
+  body(id=page)
     header
-      h1 Title
       nav
-        ul
-          li: a(href="/") Home
-          li: a(href="/section1") Section 1
-          li: a(href="/section2") Section 2
-    #main
+        ul#list
+          each title, page in pages
+            li: a(href="/#{page}")= title
+
+    #content
       block content
       footer
         p Copyright 2013
 
-    != js('app')
+    != js('all')
     block scripts
