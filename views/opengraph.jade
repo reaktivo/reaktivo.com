@@ -1,0 +1,3 @@
+if opengraph
+  each val, key in opengraph
+    meta(property="og:#{key}", content=val)

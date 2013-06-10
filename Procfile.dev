@@ -1,0 +1,1 @@
+web: supervisor -e "coffee|styl|yml|jade|txt" server.js
