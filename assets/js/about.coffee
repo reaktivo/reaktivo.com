@@ -1,6 +1,6 @@
 #= require vendor/kinetic-v4.5.4.min
 
-{Stage, Layer, Rect, Animation} = Kinetic
+{Stage, Layer, Rect, Animation, Spline} = Kinetic
 
 ns App:Pages:About:
 
@@ -12,10 +12,14 @@ ns App:Pages:About:
       height: 800
 
     @rects = new Layer
+    @lines = new Layer
     @stage.add @rects
+    @stage.add @lines
 
     @animation = new Animation (=> do @draw), @rects
     do @animation.start
+
+    do @draw_lines
 
   drop: ->
     @rects.add new Rect
@@ -25,6 +29,31 @@ ns App:Pages:About:
       width: 3
       height: 12
       fill: '#ccc'
+
+  draw_lines: ->
+
+    for n in [0..30]
+
+      pos = Math.random() * 2 - 1
+      width = Math.random()
+      points = [x: 0, y: 0]
+      for i in [0...800]
+        pos += 0.02
+        last_point = points[points.length - 1]
+        x = last_point.x + Math.sin(pos) * width
+        y = last_point.y + width
+        width *= 0.998
+        points.push {x, y}
+
+      @lines.add new Spline
+        points: points
+        stroke: '#fff'
+        fill: '#fff'
+        tension: 1
+        x: Math.random() * @stage.getWidth()
+        y: 0
+
+      @lines.draw()
 
   draw: (frame) ->
 
