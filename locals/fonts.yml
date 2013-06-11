@@ -1,4 +1,2 @@
-- 'Orienta::latin'
-- 'Varela+Round::latin'
-- 'Montserrat:400,700:latin'
-- 'Chivo:400,900,900italic,400italic:latin'
+# - 'Chivo:400,900,900italic,400italic:latin'
+- 'Chivo:400'
