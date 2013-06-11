@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 
-  #about-background
+  #mouses
 
   .text
     .es: p.
@@ -13,5 +13,5 @@ block content
       This is the personal site of Marcel Miranda.<br/>
       You can view a list of selected projects to the left
 
-    .de: p.
-      Sie können eine Liste der ausgewählten Projekte auf der linken Seite durchsuchen
+  script.
+    window.MOUSES = !{JSON.stringify(mouses)}
