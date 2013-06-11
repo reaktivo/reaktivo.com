@@ -1,9 +1,9 @@
-
 #= require mouses
 
-ns App:Pages:About:
+ns App:Pages:about:
 
   init: ->
-    App.Mouses.init $ '#mouses'
-
-do App.Pages.About.init
+    $.get '/mouses', (movements) ->
+      App.Mouses.init $('#mouses'), movements
+  destroy:
+    App.Mouses.destroy()

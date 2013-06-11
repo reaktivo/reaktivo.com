@@ -1,4 +1,5 @@
-{map, each, extend, proxy} = $
+#= require vendor/page
+#= require vendor/ns
 
 ns App:
 
@@ -18,19 +19,30 @@ ns App:
         @list.css left: -40
         @content.css left: ""
     @list.mouseout()
+    page '/:page', $.proxy this, 'load'
+    do @script
 
-  load: (page) ->
+  load: (ctx) ->
+    id = ctx.path.substr(1)
     @visible = yes
-    @content.load page, => @body.attr 'id', page
+    $.get(id).success (data) =>
+      html = $("<div>").append($.parseHTML(data)).find("#content").html()
+      @content.html html
+      @body.attr {id}
+      do @script
+
+  script: ->
+    page = @body.attr 'id'
+    if App.Pages[page]
+      do App.Pages[page].init
+
 
   animate: ->
     @items.each (i) ->
       $(this).delay(80 * i).animate opacity: 1
 
   list_classes: ->
-    classes = for a in @items
-      App.Item.page a
-    classes.join " "
+    (App.Item.page a for a in @items).join " "
 
   widest: ->
     val = Math.max.apply null, ($(a).outerWidth(yes) for a in @items)
@@ -40,7 +52,7 @@ ns App:
 
     click: (e) ->
       do e.preventDefault
-      App.load App.Item.page this
+      page "/#{App.Item.page this}"
 
     page: (a) -> $(a).attr('href').substr(1)
 

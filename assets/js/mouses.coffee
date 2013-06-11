@@ -6,7 +6,7 @@ ns App:Mouses:
 
   record: []
 
-  init: (@el) ->
+  init: (@el, @movements) ->
 
     do @setup_stage
     do @setup_background
@@ -15,7 +15,7 @@ ns App:Mouses:
     @el.click => @stop_record()
     @start_record()
 
-    setInterval (=> do @draw), 1000 / 24
+    @timer = setInterval (=> do @draw), 1000 / 24
 
   draw: ->
     do @draw_background
@@ -51,8 +51,8 @@ ns App:Mouses:
 
   setup_mouses: ->
     @mouses = new Layer
-    for path, i in window.MOUSES
-      last_path = i is window.MOUSES.length - 1
+    for path, i in @movements
+      last_path = i is @movements.length - 1
       fill = if last_path then 'red' else '#222'
       @mouses.add new Circle
         fill: fill
@@ -66,13 +66,13 @@ ns App:Mouses:
   start_record: ->
     @el.on mousemove: (e) =>
       offset = @el.offset()
-      point =
+      @record.push
         x: e.pageX - offset.left
         y: e.pageY - offset.top
-      @record.push point
-      if point.x % 10 is 0
-        console.log point
 
   stop_record: ->
     @el.off 'mousemove'
     $.post '/mouses', movements: @record
+
+  destroy: ->
+    clearInterval @timer

@@ -19,7 +19,6 @@ module.exports = (options = {}) ->
   get = (callback) ->
     redis.lrange options.key, 0, -1, (err, mouses) ->
       return callback err if err
-      console.log mouses
       callback err, mouses.map (m) -> JSON.parse m
 
   add = (data, callback) ->

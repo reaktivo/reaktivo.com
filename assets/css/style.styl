@@ -1,8 +1,6 @@
 @import "vendor/normalize.css"
 @import "vendor/boilerplate.css"
-
-@import url("normalize.css")
-@import url("main.css")
+@import "iphone"
 
 link-color = #00E
 
@@ -10,7 +8,11 @@ body
   background #eee
   font-family Chivo, sans-serif
   height 100%
-  overflow hidden
+
+a, a:link
+  color link-color
+  text-decoration none
+  border-bottom 3px solid link-color
 
 #list
   font-size 36px
@@ -44,17 +46,37 @@ body
 
 #content
   position absolute
+  box-sizing border-box
   top 0
   left 100px
+  right 0
   z-index 10
   box-shadow 0 0 20px rgba(0,0,0,0.8)
   -webkit-transition left 0.2s ease-in-out
   transition left 0.4s ease-in-out
-  min-width 100%
   min-height 100%
 
   h1, h2, h3
     font-weight normal
+
+  img
+    display block
+    margin 20px 0
+  p
+    width 600px
+    padding 0 40px
+    font-size 28px
+    margin 60px 0
+
+  .keywords
+    h4
+      text-transform uppercase
+      font-size 16px
+      padding 0 40px
+      margin 0
+    p
+      margin 0 0 40px
+      font-size 24px
 
 #about #content
   padding 40px
@@ -72,4 +94,59 @@ body
     bottom 0
 
 #luciernagas #content
+  color #DBFDEA
   background url("/img/luciernagas/luciernagas_bg.png")
+  a
+    color #fff
+    border-color @color
+  .legend
+    width 640px
+    p
+      text-align center
+      font-size 16px
+      text-tranform uppercase
+
+#nok #content
+  color #DBFDEA
+  background url("/img/nok/nok_bg.png")
+  .legend
+    width 640px
+    p
+      text-align center
+      font-size 16px
+      text-tranform uppercase
+
+#armonia #content
+  background #EAE6D9
+
+#garitas #content
+  color #eee
+  background #000
+  a
+    color #7cbf32
+    border-color @color
+
+#knotbad #content
+  padding 40px
+  color #fff
+  background #222
+  overflow-x hidden
+  .description
+    float left
+    margin-top 60px
+    position relative
+    p
+      font-size 16px
+      padding 0
+      margin 20px 0
+      width 250px
+      a
+        color #fff
+        background link-color
+        padding 5px 10px
+
+  .iphone
+    position relative
+    float left
+    margin-right 20px
+    z-index 2
