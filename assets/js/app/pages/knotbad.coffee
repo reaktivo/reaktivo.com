@@ -1,4 +1,4 @@
-#= require ../../jquery.iphone
+#= require ../../vendor/jquery.iphone
 
 ns App:Pages:knotbad:
 
