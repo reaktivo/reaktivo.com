@@ -9,7 +9,7 @@ ns App:Menu:
     @body = $ '#body'
     @content = $ '#content'
     WebFontConfig.ready => do @animate
-    @items.on 'click mouseup': => do @navigate
+    @items.on 'click mouseup': @navigate
     @list.on
       'mouseover touchstart' : => do @open
       'mouseout touchend'  : => do @close
