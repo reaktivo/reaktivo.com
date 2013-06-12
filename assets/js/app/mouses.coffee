@@ -1,4 +1,4 @@
-#= require vendor/kinetic-v4.5.4.min
+#= require ../vendor/kinetic-v4.5.4.min
 
 { Stage, Layer, Line, Circle, Animation } = Kinetic
 

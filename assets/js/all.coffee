@@ -3,5 +3,5 @@
 #= require vendor/jquery.transit.min
 #= require vendor/ns
 #= require app
-#= require about
-#= require knotbad
+#= require app/pages/about
+#= require app/pages/knotbad

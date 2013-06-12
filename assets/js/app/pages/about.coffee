@@ -1,4 +1,4 @@
-#= require mouses
+#= require ../mouses
 
 ns App:Pages:about:
 
