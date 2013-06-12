@@ -1,6 +1,6 @@
-#= require vendor/page
-#= require vendor/ns
-#= require app/menu
+#= require ../vendor/page
+#= require ../vendor/ns
+#= require menu
 
 ns App:
 
