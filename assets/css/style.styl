@@ -17,10 +17,13 @@ a, a:link
 #list
   font-size 36px
   position fixed
+  top 0
+  bottom 0
+  background red
   z-index 1
   list-style-type none
-  margin 20px 0
-  padding 0
+  margin 0
+  padding 20px 0
   -webkit-transition all 0.2s ease-in-out
   transition all 0.4s ease-in-out
 
@@ -35,6 +38,12 @@ a, a:link
 
   .transparent
     opacity 0
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
+  #list
+    font-size 18px
+    a
+      border-bottom-width 2px !important
 
 #list a:visited
   color #eee
@@ -139,7 +148,7 @@ a, a:link
       font-size 16px
       padding 0
       margin 20px 0
-      width 250px
+      width 200px
       a
         color #fff
         background link-color
