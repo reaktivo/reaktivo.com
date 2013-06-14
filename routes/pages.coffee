@@ -6,5 +6,8 @@ module.exports = (app) ->
     page = req.params.page or default_page
     title = app.locals.pages[page]
     if title
-      res.render "pages/#{page}", {page, title}
+      res.render "pages/#{page}/#{page}", {page, title}
     else do next
+
+  app.get '/test', (req, res, next) ->
+    res.render "../test"
