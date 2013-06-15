@@ -7,5 +7,5 @@ module.exports = (app) ->
       res.send data
 
   app.post '/mouses', (req, res, next) ->
-    mouses.add req.body.movements, (err) ->
+    mouses.add req.body.recording, (err) ->
       res.send if err then 500 else 200

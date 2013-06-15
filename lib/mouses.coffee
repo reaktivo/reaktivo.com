@@ -3,9 +3,9 @@ redis = require('redis').createClient REDIS_PORT, REDIS_HOST
 redis.auth REDIS_AUTH
 
 
-valid = (data) ->
-  return false unless Array.isArray data
-  for point in data
+valid = (recording) ->
+  return false unless Array.isArray recording
+  for point in recording
     keys = Object.keys point
     return false if keys.length isnt 2
     for d in ['x', 'y']
@@ -21,10 +21,10 @@ module.exports = (options = {}) ->
       return callback err if err
       callback err, mouses.map (m) -> JSON.parse m
 
-  add = (data, callback) ->
-    if valid data
+  add = (recording, callback) ->
+    if valid recording
       redis.multi()
-        .lpush(options.key, JSON.stringify(data))
+        .lpush(options.key, JSON.stringify(recording))
         .ltrim(options.key, 0, options.len - 1)
         .exec(callback)
     else
