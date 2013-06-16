@@ -1,41 +1,32 @@
-#= require ../vendor/kinetic-v4.5.4.min
+#= require ../vendor/kinetic-v4.5.4
 
-{ Stage, Layer, Line, Circle, Animation } = Kinetic
+{ Stage, Layer, Animation, Polygon } = Kinetic
+
+Math.HALF_PI = Math.PI / 2
 
 ns App:Mouses:
 
-  record: []
+  worm_length: 20
 
   init: (@el, @movements) ->
 
-    do @setup_stage
-    do @setup_background
-    do @setup_mouses
-
-    @el.click => @stop_record()
+    $(document).click => @stop_record()
     @start_record()
 
-    @timer = setInterval (=> do @draw), 1000 / 24
+    if @movements?.length > 0
+      do @setup_stage
+      do @setup_worms
+      @animation = new Animation (=> do @update_worms), @worms
+      do @animation.start
 
-  draw: ->
-    do @draw_background
-    do @draw_mouses
-
-  draw_background: ->
-    points = []
-    @mouses.getChildren().each (mouse) ->
-      {x, y} = mouse.getAttrs()
-      points.push {x, y}
-    @line.setAttrs {points}
-    do @background.draw
-
-  draw_mouses: (frame) ->
-    @mouses.getChildren().each (mouse) ->
-      path = mouse.getAttr('path')
-      mouse.setAttrs path.shift()
-      if path.length is 0
-        mouse.setAttr 'path', mouse.getAttr('ogpath').reverse().slice()
-    do @mouses.draw
+  update_worms: ->
+    for worm in @worms.children
+      { path, index } = worm.attrs
+      index += 1
+      index = 1 - @worm_length if index >= path.length
+      rindex = if index < 0 then 0 else index
+      points = @get_shape path.slice(rindex, index + @worm_length)
+      worm.setAttrs { index, points }
 
   setup_stage: ->
     @stage = new Stage
@@ -43,36 +34,56 @@ ns App:Mouses:
       width: @el.width()
       height: @el.height()
 
-  setup_background: ->
-    @background = new Layer
-    @line = new Line(stroke: '#222', strokeWidth: 3, points: [x:0,y:0])
-    @background.add @line
-    @stage.add @background
+  get_shape: (path) ->
+    side1 = []
+    side2 = []
+    for point, i in path
+      if i is 0 or i is path.length - 1
+        side1.push point
+      else
+        prev_point = path[i - 1]
+        delta =
+          x: point.x - prev_point.x
+          y: point.y - prev_point.y
+        distance = Math.sqrt Math.pow(delta.x, 2) + Math.pow(delta.y, 2)
+        distance *= 0.2
+        angle1 = Math.atan2(delta.y, delta.x) - Math.HALF_PI
+        angle2 = angle1 + Math.PI
+        side1.push
+          x: point.x + (distance * Math.cos(angle1))
+          y: point.y + (distance * Math.sin(angle1))
+        side2.unshift
+          x: point.x + (distance * Math.cos(angle2))
+          y: point.y + (distance * Math.sin(angle2))
+    side1.concat side2
 
-  setup_mouses: ->
-    @mouses = new Layer
+  setup_worms: ->
+    @worms = new Layer
+    @stage.add @worms
+
     for path, i in @movements
-      last_path = i is @movements.length - 1
-      fill = if last_path then 'red' else '#222'
-      @mouses.add new Circle
-        fill: fill
-        radius: 25
+      @worms.add new Polygon
+        x: 0
+        y: 0
+        fill: "#222"
+        opacity: Math.random() * 0.8 + 0.2
         path: path
-        ogpath: path.slice()
-        stroke: '#000'
-        strokeWidth: 3
-    @stage.add @mouses
+        index: 0
+        points: @get_shape path
 
   start_record: ->
-    @el.on mousemove: (e) =>
-      offset = @el.offset()
-      @record.push
-        x: e.pageX - offset.left
-        y: e.pageY - offset.top
+    @recording = []
+    $(document).on mousemove: (e) =>
+      @recording.push x: e.pageX, y: e.pageY
 
   stop_record: ->
-    @el.off 'mousemove'
-    $.post '/mouses', movements: @record
+    $(document).off 'mousemove'
+    $.ajax
+      url: '/mouses'
+      type: 'post'
+      data: JSON.stringify { @recording }
+      contentType: "application/json"
+
 
   destroy: ->
-    clearInterval @timer
+    # do @animation.stop
