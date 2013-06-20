@@ -13,13 +13,13 @@ html
     include fonts
     block head
   body(id=page)
-    header
-      nav
-        ul#list
-          each title, page in pages
-            li: a(href="/#{page}")= title
+    nav
+      ul#list
+        each title, page in pages
+          li: a(href="/#{page}")= title
 
     #content
+      p: a.index(href="/") Índice
       block content
 
     != js('all')
