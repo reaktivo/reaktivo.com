@@ -4,7 +4,7 @@ redis.auth REDIS_AUTH
 
 
 valid = (recording) ->
-  return false unless Array.isArray recording
+  return false if not Array.isArray(recording) or recording.length is 0
   for point in recording
     keys = Object.keys point
     return false if keys.length isnt 2
