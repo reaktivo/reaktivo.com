@@ -1,35 +1,78 @@
 #= require ../vendor/ns
 #= require ../vendor/jquery.swipe
 
-ns App:Menu:
+ns App:Menu: class
 
-  init: ->
+  constructor: ->
+
+    @touch = {}
+
+    # setup selectors
     @list = $ '#list'
     @items = $ 'a', @list
+    @document = $ document
     @body = $ '#body'
     @content = $ '#content'
-    WebFontConfig.ready => do @animate
-    @items.on 'click mouseup': @navigate
+
+    # setup events
+
+    WebFontConfig.ready @animate
+    @items.click @navigate
     @list.on
-      'mouseover touchstart' : => do @open
-      'mouseout touchend'  : => do @close
-    do @close
+      mouseenter: @open
+      mouseleave: @close
+    @document.on
+      touchstart: @touchstart
+      touchmove:  @touchmove
+      touchend:   @touchend
+    @document.on { click: @open }, '.index'
 
-  open: ->
-    @list.css left: 0
-    @content.css left: @widest()
+    # open menu if device is touch capable
+    do if Modernizr.touch then @open else @close
 
-  close: ->
-    @list.css left: -40
-    @content.css left: ""
+  open: (e) =>
+    do e.preventDefault if e
+    if Modernizr.mq 'screen and (max-width:320px)'
+      width = 320
+    else
+      width = Math.max.apply null, ($(a).outerWidth(yes) for a in @items)
+    @move 0, width
 
-  animate: ->
+  close: (e) =>
+    do e.preventDefault if e
+    @move -40, 0
+
+  move: (list, content) =>
+    @list.stop().animate left: list
+    @content.stop().animate left: content
+
+  animate: =>
     @items.each (i) ->
-      $(this).delay(80 * i).animate opacity: 1
+      $(this).delay(80 * i).transition opacity: 1
 
-  widest: ->
-    Math.max.apply null, ($(a).outerWidth(yes) for a in @items)
-
-  navigate: (e) ->
+  navigate: (e) =>
     do e.preventDefault
-    page $(this).attr('href')
+    do @close if Modernizr.touch
+    page $(e.currentTarget).attr('href')
+
+  ### Touch Handlers ###
+
+  touchstart: (e) =>
+    @touch.start =
+      x: e.originalEvent.pageX
+      y: e.originalEvent.pageY
+
+  touchmove: (e) =>
+    @touch.end =
+      x: e.originalEvent.pageX
+      y: e.originalEvent.pageY
+    @touch.delta =
+      x: @touch.end.x - @touch.start.x
+      y: @touch.end.y - @touch.start.y
+    if Math.abs(@touch.delta.x) > Math.abs(@touch.delta.y) and @touch.delta.x > 0
+      do e.preventDefault
+      @content.css left: @touch.delta.x
+
+  touchend: (e) =>
+    if @touch.delta
+      do if @touch.delta.x > 60 then @open else @close
