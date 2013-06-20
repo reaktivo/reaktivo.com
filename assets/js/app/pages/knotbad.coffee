@@ -1,8 +1,8 @@
 #= require ../../vendor/jquery.iphone
 
-ns App:Pages:knotbad:
+ns App:Pages:knotbad: class
 
-  init: ->
+  constructor: ->
     @iphone = $('.iphone').iphone()
     @iphone.css left: -400, opacity: 0, rotate: -20
     @iphone.transition left: 0, opacity: 1, rotate: 0, 3000, =>
@@ -11,6 +11,4 @@ ns App:Pages:knotbad:
     @description = $('.description')
     @description.css left: -300, opacity: 0
 
-
-  destroy:
-    App.Mouses.destroy()
+  destroy: ->

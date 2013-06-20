@@ -1,9 +1,7 @@
 #= require ../mouses
 
-ns App:Pages:about:
+ns App:Pages:about: class
 
-  init: ->
-    $.get '/mouses', (movements) ->
-      App.Mouses.init $('#mouses'), movements
-  destroy:
-    App.Mouses.destroy()
+  constructor: ->
+    $.get '/mouses', (movements) =>
+      @mouses = new App.Mouses $('#mouses'), movements

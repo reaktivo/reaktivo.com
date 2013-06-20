@@ -4,22 +4,21 @@
 
 Math.HALF_PI = Math.PI / 2
 
-ns App:Mouses:
+ns App:Mouses: class
 
   worm_length: 20
 
-  init: (@el, @movements) ->
+  constructor: (@el, @movements) ->
 
-    $(document).click => @stop_record()
     @start_record()
 
     if @movements?.length > 0
       do @setup_stage
       do @setup_worms
-      @animation = new Animation (=> do @update_worms), @worms
+      @animation = new Animation @update_worms, @worms
       do @animation.start
 
-  update_worms: ->
+  update_worms: =>
     for worm in @worms.children
       { path, index } = worm.attrs
       index += 1
@@ -28,13 +27,13 @@ ns App:Mouses:
       points = @get_shape path.slice(rindex, index + @worm_length)
       worm.setAttrs { index, points }
 
-  setup_stage: ->
+  setup_stage: =>
     @stage = new Stage
       container: @el[0]
       width: @el.width()
       height: @el.height()
 
-  get_shape: (path) ->
+  get_shape: (path) =>
     side1 = []
     side2 = []
     for point, i in path
@@ -57,33 +56,32 @@ ns App:Mouses:
           y: point.y + (distance * Math.sin(angle2))
     side1.concat side2
 
-  setup_worms: ->
+  setup_worms: =>
     @worms = new Layer
     @stage.add @worms
-
     for path, i in @movements
-      @worms.add new Polygon
-        x: 0
-        y: 0
-        fill: "#222"
-        opacity: Math.random() * 0.8 + 0.2
-        path: path
-        index: 0
-        points: @get_shape path
+      @create_worm path
 
-  start_record: ->
+  create_worm: (path) =>
+    @worms.add new Polygon
+      x: 0
+      y: 0
+      fill: "#00e"
+      opacity: Math.random() * 0.8 + 0.2
+      path: path
+      index: 0
+      points: @get_shape path
+
+  start_record: =>
     @recording = []
-    $(document).on mousemove: (e) =>
-      @recording.push x: e.pageX, y: e.pageY
+    $('.index').click @stop_record
+    $(document).mousemove (e) => @recording.push x: e.pageX, y: e.pageY
 
-  stop_record: ->
+  stop_record: =>
     $(document).off 'mousemove'
     $.ajax
       url: '/mouses'
       type: 'post'
       data: JSON.stringify { @recording }
       contentType: "application/json"
-
-
-  destroy: ->
-    # do @animation.stop
+      success: (path) => @create_worm path
