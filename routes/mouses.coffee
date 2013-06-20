@@ -8,4 +8,7 @@ module.exports = (app) ->
 
   app.post '/mouses', (req, res, next) ->
     mouses.add req.body.recording, (err) ->
-      res.send if err then 500 else 200
+      if err
+        res.send 500
+      else
+        res.send 200, req.body.recording
