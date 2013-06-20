@@ -2,16 +2,18 @@ extends ../../layout
 
 block content
 
-  iframe(src="http://player.vimeo.com/video/27073643?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1", width="640", height="288", frameborder="0", webkitAllowFullScreen, mozallowfullscreen, allowFullScreen)
+  iframe(src="http://player.vimeo.com/video/27073643?title=0&amp;byline=0&amp;portrait=0", width="768", height="346", frameborder="0", webkitAllowFullScreen, mozallowfullscreen, allowFullScreen)
 
   :markdown
-    Luciérnagas el resultado de un par de noches de experimentación
-    con [Ruby/Processing](https://github.com/jashkenas/ruby-processing). Para los interesados,
-    el código fuente está disponible en [github](https://github.com/reaktivo/rp-luciernagas).
+    Luciérnagas es el resultado de un ejercicio de experimentación con animación interactiva.
+    Hecho en un par de noches, la animación es configurable en tiempo real gracias a
+    [Ruby/Processing](https://github.com/jashkenas/ruby-processing).
 
   img.one(src="/img/luciernagas/luciernagas_01.jpg")
 
-  .legend: p — Tropical —
+  :markdown
+    Para los interesados, el código fuente está disponible en
+    [github](https://github.com/reaktivo/rp-luciernagas).
 
   img.two(src="/img/luciernagas/luciernagas_02.jpg")
 
@@ -20,7 +22,3 @@ block content
   img.three(src="/img/luciernagas/luciernagas_03.png")
 
   img.four(src="/img/luciernagas/luciernagas_04.png")
-
-  .keywords
-    h4 Keywords:
-    p Interactive, Processing, Ruby, Experimentation
