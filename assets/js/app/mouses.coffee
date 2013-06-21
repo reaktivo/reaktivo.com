@@ -10,7 +10,7 @@ ns App:Mouses: class
 
   constructor: (@el, @movements) ->
 
-    @start_record()
+    do @start_record unless Modernizr.touch
 
     if @movements?.length > 0
       do @setup_stage
