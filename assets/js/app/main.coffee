@@ -27,7 +27,7 @@ ns App:Main: class
 
   script: (page) =>
     if App.Pages[page]
-      new App.Pages[page]
+      @current = new App.Pages[page]
 
 $(document).ready ->
   window.app = new App.Main
