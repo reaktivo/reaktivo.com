@@ -20,7 +20,9 @@ ns App:Main: class
     id = ctx.path.substr 1
     return if id is @body.attr('id')
     $.get(id).done (data) =>
-      @content.html $("<div>").append($.parseHTML(data)).find("#content").html()
+      html = $("<div>").append($.parseHTML(data))
+      @content.html html.find("#content").html()
+      document.title = html.find('title').text()
       @body.attr {id}
       @script id
       window.scrollTo 0,0

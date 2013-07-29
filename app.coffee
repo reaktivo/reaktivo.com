@@ -2,12 +2,18 @@ require 'js-yaml'
 express = require 'express'
 stylus = require 'stylus'
 assets = require 'connect-assets'
+mincer = require 'mincer'
 load = require 'express-load'
 {join} = require 'path'
 {extend} = require 'underscore'
 
+
 # create app
 module.exports = app = express()
+
+# setup mincer
+mincer = new mincer.Environment
+mincer.appendPath('views/pages/garitas')
 
 # settings
 app.set 'root', __dirname
@@ -23,6 +29,7 @@ app.use express.bodyParser()
 app.use express.methodOverride()
 app.use app.router
 app.use assets()
+app.use express.static join __dirname, "views/pages"
 app.use express.static join __dirname, "assets"
 
 # load locals and routes into app

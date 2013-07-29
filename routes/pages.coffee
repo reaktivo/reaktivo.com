@@ -4,7 +4,7 @@ module.exports = (app) ->
 
   app.get '/:page?', (req, res, next) ->
     page = req.params.page or default_page
-    title = app.locals.pages[page]
+    title = app.locals.pages[page] + " — Reaktivo"
     if title
       res.render "pages/#{page}/#{page}", {page, title}
     else do next
