@@ -1,2 +1,7 @@
-_setAccount: ['UA-1116368-1']
-_setDomainName: ['reaktivo.com']
+-
+  - create
+  - UA-42917175-1
+  - reaktivo.com
+-
+  - send
+  - pageview
