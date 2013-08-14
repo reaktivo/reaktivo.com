@@ -14,7 +14,11 @@ ns App:Main: class
     @body = $ 'body'
     @content = $ "#content"
     page '/:page', @load
+    page '/', @root
+    do page.start
     @script @body.attr('id')
+
+  root: (ctx) => do @menu.open
 
   load: (ctx) =>
     id = ctx.path.substr 1

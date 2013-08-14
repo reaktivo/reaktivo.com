@@ -8,7 +8,7 @@ ns App:Menu: class
     @touch = {}
 
     # setup selectors
-    @list = $ '#list'
+    @list = $ 'body > nav ul'
     @items = $ 'a', @list
     @document = $ document
     @body = $ '#body'
@@ -16,7 +16,8 @@ ns App:Menu: class
 
     # setup events
 
-    WebFontConfig.ready @animate
+    # WebFontConfig.ready @animate
+    do @animate
     @items.click @navigate
     @list.on
       mouseenter: @open
@@ -25,7 +26,7 @@ ns App:Menu: class
       touchstart: @touchstart
       touchmove:  @touchmove
       touchend:   @touchend
-    @document.on { click: @open }, '.index'
+    @document.on { click: @index }, '.index'
 
     # open menu if device is touch capable
     if Modernizr.touch or document.location.pathname is "/"
@@ -33,12 +34,16 @@ ns App:Menu: class
     else
       do @close
 
+  index: (e) =>
+    do e?.preventDefault
+    page '/'
+
   open: (e) =>
-    do e.preventDefault if e
-    if Modernizr.mq 'screen and (max-width:320px)'
-      width = 320
+    do e?.preventDefault
+    width = if Modernizr.mq 'screen and (max-width:320px)'
+      320
     else
-      width = Math.max.apply null, ($(a).outerWidth(yes) for a in @items)
+      Math.max.apply null, ($(a).outerWidth(yes) for a in @items)
     @move 0, width
 
   close: (e) =>
