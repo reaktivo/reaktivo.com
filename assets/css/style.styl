@@ -2,6 +2,7 @@
 @import "vendor/boilerplate.css"
 @import "mixins"
 @import "iphone"
+@import "pace"
 
 link-color = #00E
 
@@ -79,6 +80,16 @@ a, a:link
   min-height 100%
   width 768px
   min-width 100%
+  padding-bottom 40px
+
+  header
+    margin 20px 40px
+    @media only screen and (max-width: 320px)
+      margin-left 20px
+
+  .center
+    margin 0 auto
+    width 768px
 
   .index
     padding 3px
@@ -86,30 +97,103 @@ a, a:link
     position relative
     z-index 2
 
-  h1, h2, h3, h4, p, img, ul
+  h1, h2, h3, h4, p, ul
     max-width 768px
 
   a:hover
     color #fff
     background link-color
 
-  img
-    display block
-    margin 20px 0
-    width 100%
-
   h1, h2, h3, h4, p
     box-sizing border-box
     font-weight normal
     width 100%
     padding 20px 40px
-    margin 0
+    margin 0 auto
 
   .legend
     p
       text-align center
       font-size 16px
       text-tranform uppercase
+
+media-image()
+  text-align center
+  margin 20px 0
+  img
+    display block
+    width 100%
+    max-width 100%
+    margin-top 20px
+    margin-bottom 20px
+
+.image-full
+  media-image()
+  @media screen and (min-width: 1024px)
+    img.browser-chrome
+      display inline
+      margin 20px
+      max-width 45%
+      padding 1.8% 2px 2px
+      border-radius 5px
+      border-bottom-left-radius 0
+      border-bottom-right-radius 0
+      background #000
+
+  @media screen and (max-width: 1023px)
+    margin 40px 0
+    img.browser-chrome
+      border 5px solid #000
+      border-left none
+      border-right none
+      margin -5px 0 0
+
+.image-full
+  media-image()
+
+.image-768
+  media-image()
+  img
+    width 768px
+
+.image-320
+  media-image()
+  img
+    display inline
+    margin 20px
+  @media screen and (max-width: 320px)
+    img.iphone-chrome
+      margin 20px 0
+  @media screen and (min-width: 321px)
+    img.iphone-chrome
+      width 320px
+      padding 60px 8px
+      border-radius 30px
+      background #000
+
+.image-simple
+  text-align center
+  img
+    display inline
+    border 2px solid #037883
+    margin 20px
+    max-width 100%
+    @media only screen and (max-width: 320px)
+      border none
+      margin 20px 0
+
+
+.video-full
+  position relative
+  height 0
+  margin 20px 0
+  iframe
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+
 
 @media only screen and (max-width: 320px)
 

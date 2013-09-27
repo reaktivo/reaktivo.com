@@ -29,7 +29,7 @@ ns App:Menu: class
     @document.on { click: @index }, '.index'
 
     # open menu if device is touch capable
-    if Modernizr.touch or document.location.pathname is "/"
+    if document.location.pathname is "/" and not Modernizr.touch
       do @open
     else
       do @close

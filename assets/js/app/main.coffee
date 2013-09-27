@@ -15,12 +15,16 @@ ns App:Main: class
     @content = $ "#content"
     page '/:page', @load
     page '/', @root
-    do page.start
+    page.start(dispatch: no)
     @script @body.attr('id')
 
-  root: (ctx) => do @menu.open
+  root: =>
+    console.log 'open'
+    do @menu.open
+    setTimeout (=> do window.Pace.stop), 100
 
   load: (ctx) =>
+    console.log 'load'
     id = ctx.path.substr 1
     return if id is @body.attr('id')
     $.get(id).done (data) =>
@@ -30,6 +34,7 @@ ns App:Main: class
       @body.attr {id}
       @script id
       window.scrollTo 0,0
+      window.Pace.stop()
 
   script: (page) =>
     if App.Pages[page]

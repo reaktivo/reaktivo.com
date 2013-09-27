@@ -2,23 +2,26 @@ extends ../../layout
 
 block content
 
-  iframe(src="http://player.vimeo.com/video/27073643?title=0&amp;byline=0&amp;portrait=0", width="768", height="346", frameborder="0", webkitAllowFullScreen, mozallowfullscreen, allowFullScreen)
+  .video-full(style="padding-bottom:45%")
+    iframe(src="http://player.vimeo.com/video/27073643?title=0&amp;byline=0&amp;portrait=0", frameborder="0", webkitAllowFullScreen, mozallowfullscreen, allowFullScreen)
 
   :markdown
     Luciérnagas es el resultado de un ejercicio de experimentación con animación interactiva.
     Hecho en un par de noches, la animación es configurable en tiempo real gracias a
     [Ruby/Processing](https://github.com/jashkenas/ruby-processing).
 
-  img.one(src="/luciernagas/luciernagas_01.jpg")
-
-  :markdown
-    Para los interesados, el código fuente está disponible en
+    El código fuente está disponible en
     [github](https://github.com/reaktivo/rp-luciernagas).
 
-  img.two(src="/luciernagas/luciernagas_02.jpg")
 
-  .legend: p Interface para controlar settings en tiempo real:
+  .image-simple
+    img(src="/luciernagas/luciernagas_01.jpg")
+    img(src="/luciernagas/luciernagas_02.jpg")
 
-  img.three(src="/luciernagas/luciernagas_03.png")
+  :markdown
+    Ruby/Processing me permitió crear una interface nativa para controlar *en tiempo real*
+    variables de velocidad, longitud de partícula, ángulo de curva, etc.
 
-  img.four(src="/luciernagas/luciernagas_04.png")
+  .image-simple
+    img(src="/luciernagas/luciernagas_03.png")
+    img(src="/luciernagas/luciernagas_04.png")

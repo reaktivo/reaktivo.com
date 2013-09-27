@@ -2,14 +2,13 @@ extends ../../layout
 
 block content
 
-  iframe(width="768", height="432", src="http://www.youtube-nocookie.com/embed/PMX6a5Fl9Ss?rel=0&amp;hd=1", frameborder="0", allowfullscreen)
-
   :markdown
-    Nok es otro experimento visual con [Ruby/Processing](https://github.com/jashkenas/ruby-processing)
+    Nok es un experimento visual con [Ruby/Processing](https://github.com/jashkenas/ruby-processing)
     realizado unos días después de [Luciérnagas](/luciernagas).
 
-  img(src="/nok/nok_01.jpg")
+  .video-full(style="padding-bottom:56%")
+    iframe(src="http://www.youtube-nocookie.com/embed/PMX6a5Fl9Ss?rel=0&amp;hd=1", frameborder="0", allowfullscreen)
 
-  .legend: p — Nok —
-
-  img(src="/nok/nok_02.jpg")
+  .image-simple
+    img(src="/nok/nok_01.jpg")
+    img(src="/nok/nok_02.jpg")
