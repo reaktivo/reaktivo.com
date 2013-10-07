@@ -80,10 +80,14 @@ a, a:link
   min-height 100%
   width 768px
   min-width 100%
+  padding-top 60px
   padding-bottom 40px
 
   header
     margin 20px 40px
+    position fixed
+    top 0
+    z-index 3000
     @media only screen and (max-width: 320px)
       margin-left 20px
 
@@ -96,6 +100,11 @@ a, a:link
     margin -3px
     position relative
     z-index 2
+    a
+      transition all 0.8s ease-in-out
+      -webkit-transition @transition
+      -moz-transition @transition
+
 
   h1, h2, h3, h4, p, ul
     max-width 768px
@@ -220,7 +229,7 @@ media-image()
 @import "../../views/pages/luciernagas/luciernagas"
 @import "../../views/pages/nok/nok"
 @import "../../views/pages/lnh/lnh"
-@import "../../views/pages/amfmf12/amfmf12"
+@import "../../views/pages/amfmf13/amfmf13"
 
 
 
