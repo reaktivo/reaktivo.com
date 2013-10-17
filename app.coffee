@@ -2,22 +2,19 @@ require 'js-yaml'
 express = require 'express'
 stylus = require 'stylus'
 assets = require 'connect-assets'
-mincer = require 'mincer'
 load = require 'express-load'
+nconf = require 'nconf'
 {join} = require 'path'
 {extend} = require 'underscore'
 
+nconf.env().file(file: 'config.json')
 
 # create app
 module.exports = app = express()
 
-# setup mincer
-mincer = new mincer.Environment
-mincer.appendPath('views/pages/garitas')
-
 # settings
 app.set 'root', __dirname
-app.set 'port', process.env.PORT or 3000
+app.set 'port', nconf.get('PORT') or 3000
 app.set 'views', join __dirname, "views"
 app.set 'view engine', 'jade'
 app.set 'title', ""
