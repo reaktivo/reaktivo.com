@@ -1,4 +1,7 @@
-{ REDIS_HOST, REDIS_PORT, REDIS_AUTH } = process.env
+nconf = require 'nconf'
+REDIS_HOST = nconf.get 'REDIS_HOST'
+REDIS_PORT = nconf.get 'REDIS_CONF'
+REDIS_AUTH = nconf.get 'REDIS_AUTH'
 redis = require('redis').createClient REDIS_PORT, REDIS_HOST
 redis.auth REDIS_AUTH
 
