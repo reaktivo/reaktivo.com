@@ -1,3 +1,2 @@
 git push
-rsync -avzP config.json drop:reaktivo.com/
 ssh drop "cd ~/reaktivo.com && git pull && npm install && forever restartall"
