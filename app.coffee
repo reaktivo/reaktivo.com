@@ -7,7 +7,7 @@ nconf = require 'nconf'
 {join} = require 'path'
 {extend} = require 'underscore'
 
-nconf.env().file(file: 'config.json')
+nconf.env().file(file: join(__dirname, 'config.json'))
 
 # create app
 module.exports = app = express()
