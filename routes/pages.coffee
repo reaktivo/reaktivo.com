@@ -1,5 +1,7 @@
 module.exports = (app) ->
 
+  console.log 'PAGES'
+
   default_page = 'about'
 
   app.get '/:page?', (req, res, next) ->
