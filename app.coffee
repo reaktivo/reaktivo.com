@@ -10,6 +10,8 @@ nconf = require 'nconf'
 nconf.env().file(file: join(__dirname, 'config.json'))
 process.env.NODE_ENV = nconf.get('NODE_ENV')
 
+console.log 'DIRNAME', __dirname
+
 # create app
 module.exports = app = express()
 
