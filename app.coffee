@@ -31,8 +31,8 @@ app.use express.static join __dirname, "assets"
 app.use app.router
 
 # load locals and routes into app
-load('locals', extlist: ['.yml']).into(app)
-load('routes').into(app)
+load('locals', extlist: ['.yml'], cwd: __dirname).into(app)
+load('routes', cwd: __dirname).into(app)
 
 # configure for development
 app.configure 'development', ->
