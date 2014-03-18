@@ -1,3 +1,4 @@
+process.chdir __dirname
 require 'js-yaml'
 express = require 'express'
 stylus = require 'stylus'
@@ -8,16 +9,13 @@ nconf = require 'nconf'
 {extend} = require 'underscore'
 
 nconf.env().file(file: join(__dirname, 'config.json'))
-process.env.NODE_ENV = nconf.get('NODE_ENV')
-
-process.chdir(__dirname)
 
 # create app
 module.exports = app = express()
 
 # settings
 app.set 'root', __dirname
-app.set 'port', nconf.get('PORT') or 3000
+app.set 'port', process.env.PORT or 3000
 app.set 'views', join __dirname, "views"
 app.set 'view engine', 'jade'
 app.set 'title', ""
