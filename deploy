@@ -1,2 +1,0 @@
-git push
-ssh drop "cd ~/reaktivo.com && git pull && npm install && forever restartall"
