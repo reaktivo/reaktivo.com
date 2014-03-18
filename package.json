@@ -13,7 +13,7 @@
     "express": "~3.4.1",
     "jade": "*",
     "stylus": "*",
-    "coffee-script": "~1.6.3",
+    "coffee-script": "~1.7.1",
     "express-resource": "~0.2.4",
     "js-yaml": "~1.0.2",
     "connect-assets": "~2.3.3",
