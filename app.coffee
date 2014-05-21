@@ -40,4 +40,4 @@ app.configure 'development', ->
 
 # start application
 app.listen app.get 'port'
-console.log "Express server listening on port #{app.get('port')}"
+console.log "Express server listening on port #{app.get('port')} on #{process.env.NODE_ENV} mode"
