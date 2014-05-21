@@ -25,7 +25,7 @@ app.use express.favicon join(__dirname, "assets", "favicon.ico")
 app.use express.logger('dev')
 app.use express.bodyParser()
 app.use express.methodOverride()
-app.use assets()
+app.use assets(helperContext: app.locals)
 app.use express.static join __dirname, "views/pages"
 app.use express.static join __dirname, "assets"
 app.use app.router

@@ -1,7 +1,7 @@
-gaq_text = ""
-each command in analytics
-  line = []
-  each value in command
+- gaq_text = ""
+- each command in analytics
+  - line = []
+  - each value in command
     - line.push(JSON.stringify(value))
   - gaq_text += "ga("+ line.join(",") + ");\n"
 
