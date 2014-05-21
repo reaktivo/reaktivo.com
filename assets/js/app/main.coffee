@@ -1,6 +1,6 @@
 #= require ../vendor/page
 #= require ../vendor/ns
-#= require menu
+#= require ./menu
 
 #
 # http://www.artzstudio.com/files/jquery-boston-2010/jquery.sonar/jquery.sonar.js
