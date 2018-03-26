@@ -7,7 +7,7 @@ module.exports = plan
       production:
         host: 'drop.reaktivo.com'
         username: 'root'
-        privateKey: '/Users/reaktivo/.ssh/id_rsa'
+        privateKey: '~/.ssh/id_rsa'
 
   .local (local) ->
     local.git 'push'
