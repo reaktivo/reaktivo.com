@@ -3,8 +3,7 @@ REDIS_HOST = nconf.get 'REDIS_HOST'
 REDIS_PORT = nconf.get 'REDIS_CONF'
 REDIS_AUTH = nconf.get 'REDIS_AUTH'
 redis = require('redis').createClient REDIS_PORT, REDIS_HOST
-redis.auth REDIS_AUTH
-
+redis.auth REDIS_AUTH if REDIS_AUTH
 
 valid = (recording) ->
   return false if not Array.isArray(recording) or recording.length is 0
